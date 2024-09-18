@@ -2,7 +2,7 @@
 
 **Colaboradores**: 
   - @Caio Donat <cdonat.dev@gmail.com>
-  - @Jean Cabral <>
+  - @Jean Cabral <jeanalexandre810@gmail.com>
   - @Maria Paula <mariapaulasuetti@gmail.com>
   - @Matheus de Oliveira <>
 

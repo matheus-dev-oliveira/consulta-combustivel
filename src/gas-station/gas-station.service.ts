@@ -1,15 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGasStationDto } from './dto/create-gas-station.dto';
+import { GasStationCreateDto } from './dto/gas-station-create.dto';
 import { UpdateGasStationDto } from './dto/update-gas-station.dto';
+import { GasStationRepository } from './gas-station.repository';
 
 @Injectable()
 export class GasStationService {
-  create(createGasStationDto: CreateGasStationDto) {
-    return 'This action adds a new gasStation';
+
+  constructor(
+    private readonly _repository: GasStationRepository
+  ) { }
+
+  public async createGasStation(dto: GasStationCreateDto) {
+    return await this._repository.insertGasStation(dto);
   }
 
   findAll() {
     return `This action returns all gasStation`;
+  }
+
+  public async searchManyGasStation(queries?: any) {
+    console.debug(queries);
+
+    return await this._repository.selectManyGasStation(queries);
   }
 
   findOne(id: number) {

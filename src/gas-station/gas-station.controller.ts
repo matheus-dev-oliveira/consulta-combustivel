@@ -1,36 +1,54 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { GasStationService } from './gas-station.service';
-import { CreateGasStationDto } from './dto/create-gas-station.dto';
+import { GasStationCreateDto } from './dto/gas-station-create.dto';
 import { UpdateGasStationDto } from './dto/update-gas-station.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('gas-station')
-@ApiTags('Gas Station')
+@ApiTags('Posto de Combustível')
 export class GasStationController {
-  constructor(private readonly gasStationService: GasStationService) {}
+  constructor(
+    private readonly _service: GasStationService
+  ) { }
 
   @Post()
-  create(@Body() createGasStationDto: CreateGasStationDto) {
-    return this.gasStationService.create(createGasStationDto);
+  public create(
+    @Body() gasStationCreateDto: GasStationCreateDto
+  ) {
+    return this._service.createGasStation(gasStationCreateDto);
   }
 
   @Get()
-  findAll() {
-    return this.gasStationService.findAll();
+  public findAll() {
+    return this._service.findAll();
+  }
+
+  @Get('/search')
+  public async getManyUsers(
+		@Query() queries?: any
+  ) {
+    return await this._service.searchManyGasStation(queries);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gasStationService.findOne(+id);
+  public findOne(
+    @Param('id') id: string
+  ) {
+    return this._service.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGasStationDto: UpdateGasStationDto) {
-    return this.gasStationService.update(+id, updateGasStationDto);
+  public update(
+    @Param('id') id: string,
+    @Body() updateGasStationDto: UpdateGasStationDto
+  ) {
+    return this._service.update(+id, updateGasStationDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.gasStationService.remove(+id);
+  public remove(
+    @Param('id') id: string
+  ) {
+    return this._service.remove(+id);
   }
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import AddressEntity from "src/address/entities/address.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity("gas_station")
 export default class GasStationEntity {
@@ -13,7 +14,7 @@ export default class GasStationEntity {
 	@ApiProperty({ type: String })
 	tradeName: string;
 	
-	@Column({ name: 'business_name' })
+	@Column({ name: 'business_name', unique: true })
 	@ApiProperty({ type: String })
 	businessName: string;
 	
@@ -24,4 +25,8 @@ export default class GasStationEntity {
 	@Column({ name: 'open_hours' })
 	@ApiProperty({ 	type: String })
 	openHours: string;
+
+	@OneToOne(() => AddressEntity)
+	@JoinColumn()
+	address: AddressEntity
 }

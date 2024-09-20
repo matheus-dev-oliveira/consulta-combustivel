@@ -2,6 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Like, Repository } from "typeorm";
 import GasStationEntity from "./entities/gas-station.entity";
 import { GasStationCreateDto } from "./dto/gas-station-create.dto";
+import { GasStationSearchDto } from "./dto/gas-station-search.dto";
 
 @Injectable()
 export class GasStationRepository {
@@ -15,7 +16,7 @@ export class GasStationRepository {
 		return await this._repository.save(entity);
 	}
 
-	public async selectManyGasStation(queries: any) {
+	public async selectManyGasStation(queries: GasStationSearchDto) {
 		return await this._repository.find({
 			where: {
 				businessName: queries.businessName ? Like(`%${queries.businessName}%`) : undefined,
@@ -25,5 +26,4 @@ export class GasStationRepository {
 			}
 		});
 	}
-
 }

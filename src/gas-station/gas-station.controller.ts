@@ -3,6 +3,7 @@ import { GasStationService } from './gas-station.service';
 import { GasStationCreateDto } from './dto/gas-station-create.dto';
 import { UpdateGasStationDto } from './dto/update-gas-station.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { GasStationSearchDto } from './dto/gas-station-search.dto';
 
 @Controller('gas-station')
 @ApiTags('Posto de Combustível')
@@ -18,14 +19,9 @@ export class GasStationController {
     return this._service.createGasStation(gasStationCreateDto);
   }
 
-  @Get()
-  public findAll() {
-    return this._service.findAll();
-  }
-
   @Get('/search')
   public async getManyUsers(
-		@Query() queries?: any
+		@Query() queries?: GasStationSearchDto
   ) {
     return await this._service.searchManyGasStation(queries);
   }
@@ -43,12 +39,5 @@ export class GasStationController {
     @Body() updateGasStationDto: UpdateGasStationDto
   ) {
     return this._service.update(+id, updateGasStationDto);
-  }
-
-  @Delete(':id')
-  public remove(
-    @Param('id') id: string
-  ) {
-    return this._service.remove(+id);
   }
 }

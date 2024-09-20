@@ -6,7 +6,9 @@ async function bootstrap() {
 
   const APP_PORT = process.env.APP_PORT || 3000;
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['debug', 'error', 'fatal']
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Consulta Combustível')

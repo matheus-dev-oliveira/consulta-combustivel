@@ -4,7 +4,7 @@
   - @Caio Donat <cdonat.dev@gmail.com>
   - @Jean Cabral <jeanalexandre810@gmail.com>
   - @Maria Paula <mariapaulasuetti@gmail.com>
-  - @Matheus de Oliveira <>
+  - @Matheus de Oliveira <matheusoliveirasouza2015@hotmail.com>
 
 ---
 
